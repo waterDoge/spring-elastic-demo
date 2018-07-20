@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/elastic?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: test!123#456
+    driver-class-name: com.mysql.jdbc.Driver
+  flyway:
+    table: _schema_history
+  data:
+    elasticsearch:
+      #配置es节点信息，逗号分隔，如果没有指定，
+      #则启动ClientNode，
+      #见https://stackoverflow.com/questions/39176866/spring-data-jpa-spring-data-elasticsearch-no-property-index-found-for-type/39190011）
+      cluster-nodes: 192.168.0.201:9300
+    rest:
+      base-path: api
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+config:
+  sys:
+    host: http://localhost:${server.port:8080}
