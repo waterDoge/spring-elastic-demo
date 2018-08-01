@@ -7,7 +7,6 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.ResourceProcessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +34,7 @@ public class UserController {
     public Mono<ResponseEntity<?>> create(@RequestBody UserDTO user) {
         return userService.create(user)
                 .<ResponseEntity<?>>map(user1 -> {
-                    final String self = configuration.getBasePath() + "/api/users/" + user1.getUsername();
+                    final String self = configuration.getBasePath() + "/users/" + user1.getId();
                     final Resource<User> resource = new Resource<>(user1);
                     resource.add(new Link(self));
                     return ResponseEntity.created(URI.create(self)).body(resource);

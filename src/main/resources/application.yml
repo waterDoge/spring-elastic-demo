@@ -18,6 +18,8 @@ spring:
     date-format: "yyyy-MM-dd HH:mm:ss"
     serialization:
       FAIL_ON_EMPTY_BEANS: false
+  jpa:
+    show-sql: true
 
 config:
   sys:

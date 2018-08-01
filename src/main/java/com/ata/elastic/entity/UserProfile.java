@@ -6,13 +6,12 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -35,6 +34,11 @@ public class UserProfile {
     private String familyName = "";
 
     private Gender gender = Gender.SECRET;
+
+    @ElementCollection
+    @CollectionTable(name = "user_profile_language", joinColumns = @JoinColumn(name = "user_profile_id"))
+    @Column(name = "lang")
+    private List<String> language;
 
     private Locale locale = Locale.CHINA;
 
@@ -130,5 +134,13 @@ public class UserProfile {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    public List<String> getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(List<String> language) {
+        this.language = language;
     }
 }

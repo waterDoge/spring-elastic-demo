@@ -1,6 +1,8 @@
 package com.ata.elastic.entity;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.ManyToOne;
 import java.time.ZonedDateTime;
@@ -8,10 +10,13 @@ import java.util.List;
 
 @Document(indexName = "demo", type = "article")
 public class Article {
+
     private String id;
     @ManyToOne
     private User user;
+    @Field(type = FieldType.Text, analyzer = "ik_smart", searchAnalyzer = "ik_smart")
     private String title;
+    @Field(type = FieldType.Text, analyzer = "ik_smart", searchAnalyzer = "ik_smart")
     private String content;
     private List<Comment> comments;
     private boolean hidden = false;
